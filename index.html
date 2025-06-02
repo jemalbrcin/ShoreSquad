@@ -8,44 +8,87 @@
     <link rel="stylesheet" href="css/styles.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
     <header>
         <nav class="main-nav">
-            <div class="logo">ShoreSquad</div>
+            <div class="logo">
+                <i class="fas fa-water"></i> ShoreSquad
+            </div>
             <ul class="nav-links">
-                <li><a href="#map">Find Cleanups</a></li>
-                <li><a href="#weather">Weather</a></li>
-                <li><a href="#squad">My Squad</a></li>
+                <li><a href="#map"><i class="fas fa-map-marker-alt"></i> Find Cleanups</a></li>
+                <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+                <li><a href="#squad"><i class="fas fa-users"></i> My Squad</a></li>
             </ul>
+            <button class="mobile-menu" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <h1>Make Waves of Change</h1>
+            <h1><i class="fas fa-hands-helping"></i> Make Waves of Change</h1>
             <p>Join the movement. Clean our beaches. Build community.</p>
-            <button class="cta-button">Join a Cleanup</button>
+            <button class="cta-button">
+                <i class="fas fa-plus-circle"></i> Join a Cleanup
+            </button>
         </section>
 
         <section id="map" class="map-section">
-            <h2>Beach Cleanups Near You</h2>
+            <h2><i class="fas fa-map-marked-alt"></i> Beach Cleanups Near You</h2>
+            <div class="section-intro">
+                <p>Find and join cleanup events in your area</p>
+            </div>
             <div id="cleanup-map"></div>
         </section>
 
         <section id="weather" class="weather-section">
-            <h2>Beach Weather</h2>
+            <h2><i class="fas fa-temperature-high"></i> Beach Weather</h2>
+            <div class="section-intro">
+                <p>Check current conditions for your cleanup</p>
+            </div>
             <div id="weather-widget"></div>
         </section>
 
         <section id="squad" class="squad-section">
-            <h2>Your Squad Stats</h2>
-            <div class="stats-container"></div>
+            <h2><i class="fas fa-award"></i> Your Squad Stats</h2>
+            <div class="section-intro">
+                <p>Track your team's impact</p>
+            </div>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-trash-alt"></i>
+                    <h3>Beaches Cleaned</h3>
+                    <p>0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Squad Members</h3>
+                    <p>1</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Impact Score</h3>
+                    <p>0</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 ShoreSquad. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Join our Facebook group"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p>&copy; 2025 ShoreSquad. All rights reserved.</p>
+        </div>
     </footer>
 
     <!-- Leaflet JS -->
