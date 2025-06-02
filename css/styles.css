@@ -173,6 +173,56 @@ body {
     color: var(--color-primary);
 }
 
+/* Weather Widget States */
+.weather-info.loading {
+    opacity: 0.7;
+}
+
+.weather-info.loading .weather-icon {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    color: var(--color-primary);
+}
+
+.weather-info.error {
+    color: var(--color-dark);
+}
+
+.weather-info.error .weather-icon {
+    color: #dc3545;
+    font-size: 2.5rem;
+    margin: 1rem 0;
+}
+
+.weather-info .retry-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.weather-info .retry-button:hover {
+    background-color: var(--color-accent);
+}
+
+.weather-info .feels-like {
+    font-size: 1rem;
+    color: var(--color-dark);
+    opacity: 0.8;
+    margin-top: -0.5rem;
+}
+
+.weather-info .updated {
+    font-size: 0.8rem;
+    color: var(--color-dark);
+    opacity: 0.6;
+    margin-top: 1rem;
+}
+
 /* Squad Section */
 .squad-section {
     padding: 2rem;

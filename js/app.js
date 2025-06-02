@@ -89,13 +89,44 @@ function showNotification(message) {
 
 // Weather data fetching
 async function getWeather(lat, lon) {
+    const weatherWidget = document.getElementById('weather-widget');
+    weatherWidget.innerHTML = `
+        <div class="weather-info loading">
+            <i class="fas fa-spinner fa-spin weather-icon"></i>
+            <h3>Loading weather data...</h3>
+        </div>
+    `;
+
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=25731bb0c49d0a1c314ee5e97bc62398`);
+        const API_KEY = '25731bb0c49d0a1c314ee5e97bc62398'; // Replace with your API key
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
+        );
+        
+        if (!response.ok) {
+            throw new Error(`Weather API returned ${response.status}`);
+        }
+
         const data = await response.json();
         updateWeatherWidget(data);
     } catch (error) {
         console.error('Error fetching weather:', error);
+        weatherWidget.innerHTML = `
+            <div class="weather-info error">
+                <i class="fas fa-exclamation-circle weather-icon"></i>
+                <h3>Unable to load weather data</h3>
+                <p>Please try again later</p>
+                <button onclick="retryWeather(${lat}, ${lon})" class="retry-button">
+                    <i class="fas fa-redo"></i> Retry
+                </button>
+            </div>
+        `;
     }
+}
+
+// Retry weather data fetch
+function retryWeather(lat, lon) {
+    getWeather(lat, lon);
 }
 
 // Update weather widget
@@ -109,10 +140,11 @@ function updateWeatherWidget(data) {
                 <h3>${data.name}</h3>
                 <p class="temp">${Math.round(data.main.temp)}°C</p>
                 <p class="desc">${data.weather[0].description}</p>
-                <p class="details">
+                <div class="details">
                     <span><i class="fas fa-tint"></i> ${data.main.humidity}%</span>
                     <span><i class="fas fa-wind"></i> ${Math.round(data.wind.speed)} m/s</span>
-                </p>
+                </div>
+                <p class="updated">Last updated: ${new Date().toLocaleTimeString()}</p>
             </div>
         `;
         currentWeather = data;
@@ -128,7 +160,12 @@ function getWeatherIcon(weatherType) {
         'Snow': 'fas fa-snowflake',
         'Thunderstorm': 'fas fa-bolt',
         'Drizzle': 'fas fa-cloud-rain',
-        'Mist': 'fas fa-smog'
+        'Mist': 'fas fa-smog',
+        'Fog': 'fas fa-smog',
+        'Haze': 'fas fa-smog',
+        'Dust': 'fas fa-smog',
+        'Smoke': 'fas fa-smog',
+        'Tornado': 'fas fa-wind'
     };
     return icons[weatherType] || 'fas fa-cloud';
 }
@@ -183,8 +220,10 @@ const navLinks = document.querySelector('.nav-links');
 function toggleMobileMenu() {
     navLinks.classList.toggle('show');
     const icon = mobileMenuBtn.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
+    if (icon) {
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    }
 }
 
 // Event Listeners
