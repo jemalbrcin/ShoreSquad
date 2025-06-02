@@ -23,10 +23,9 @@ function initMap() {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             map.setView([lat, lon], 13);
-            
+
             // Add demo cleanup markers
             demoCleanups.forEach((cleanup, index) => {
-                // Spread cleanup events around user's location
                 const offset = 0.01 * (index + 1);
                 cleanup.lat = lat + offset;
                 cleanup.lon = lon + offset;
@@ -39,7 +38,6 @@ function initMap() {
     }
 }
 
-// Add cleanup marker to map
 function addCleanupMarker(cleanup) {
     const marker = L.marker([cleanup.lat, cleanup.lon])
         .addTo(map)
@@ -54,7 +52,6 @@ function addCleanupMarker(cleanup) {
     markers.push(marker);
 }
 
-// Join cleanup event
 function joinCleanup(cleanupId) {
     const cleanup = demoCleanups.find(c => c.id === cleanupId);
     if (cleanup) {
@@ -64,14 +61,12 @@ function joinCleanup(cleanupId) {
     }
 }
 
-// Update all markers
 function updateMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
     demoCleanups.forEach(cleanup => addCleanupMarker(cleanup));
 }
 
-// Show notification
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.className = 'notification';
@@ -87,7 +82,6 @@ function showNotification(message) {
     }, 3000);
 }
 
-// Weather data fetching
 async function getWeather(lat, lon) {
     const weatherWidget = document.getElementById('weather-widget');
     weatherWidget.innerHTML = `
@@ -98,7 +92,7 @@ async function getWeather(lat, lon) {
     `;
 
     try {
-        const API_KEY = '25731bb0c49d0a1c314ee5e97bc62398'; // Replace with your API key
+        const API_KEY = '25731bb0c49d0a1c314ee5e97bc62398';
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
         );
@@ -124,12 +118,10 @@ async function getWeather(lat, lon) {
     }
 }
 
-// Retry weather data fetch
 function retryWeather(lat, lon) {
     getWeather(lat, lon);
 }
 
-// Update weather widget
 function updateWeatherWidget(data) {
     const weatherWidget = document.getElementById('weather-widget');
     if (data) {
@@ -151,7 +143,6 @@ function updateWeatherWidget(data) {
     }
 }
 
-// Get weather icon
 function getWeatherIcon(weatherType) {
     const icons = {
         'Clear': 'fas fa-sun',
@@ -170,7 +161,6 @@ function getWeatherIcon(weatherType) {
     return icons[weatherType] || 'fas fa-cloud';
 }
 
-// Squad stats with animations
 function updateSquadStats() {
     const statsContainer = document.querySelector('.stats-container');
     const stats = [
@@ -187,11 +177,9 @@ function updateSquadStats() {
         </div>
     `).join('');
 
-    // Animate numbers
     animateNumbers();
 }
 
-// Animate numbers
 function animateNumbers() {
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
@@ -226,15 +214,13 @@ function toggleMobileMenu() {
     }
 }
 
-// Event Listeners
+// Initialize everything when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
     updateSquadStats();
     
-    // Mobile menu event listener
     mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
 
-    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         if (navLinks?.classList.contains('show') && 
             !e.target.closest('.nav-links') && 
