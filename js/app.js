@@ -22,7 +22,7 @@ function initMap() {
 // Weather data fetching
 async function getWeather(lat, lon) {
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=YOUR_API_KEY`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=25731bb0c49d0a1c314ee5e97bc62398`);
         const data = await response.json();
         updateWeatherWidget(data);
     } catch (error) {
